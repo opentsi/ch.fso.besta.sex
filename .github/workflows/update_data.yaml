@@ -60,3 +60,4 @@ jobs:
           fi
           git commit -m "update data"
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+
