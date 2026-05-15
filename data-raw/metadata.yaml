@@ -1,60 +1,195 @@
 # OpenTSI Dataset Metadata
 # ========================
-# This file describes your dataset for the OpenTSI ecosystem.
-# Fill in the fields below and run deloRean::validate_metadata() to check.
-#
 # Key pattern: country.provider.dataset.dimension.variable.unit
-# Example: ch.adecco.sjmi.idx_type.sch.idx
 
-# Dataset identity (required)
-# These form the first three segments of every key
-country: ""   # ISO 3166-1 alpha-2 code (e.g., "ch", "de", "us")
-provider: ""  # short identifier (e.g., "adecco", "seco")
-dataset: ""   # short identifier (e.g., "sjmi", "gdp")
+country: "ch"
+provider: "fso"
+dataset: "besta"
 
-# Dataset title (required)
-# At minimum, provide English. Add other languages as needed.
 title:
-  en: ""
-  # de: ""
-  # fr: ""
+  en: Jobs by major region, economic sector, employment rate and sex
+  de: Beschäftigte nach Grossregion, Wirtschaftssektor, Beschäftigungsgrad und Geschlecht
+  fr: Emplois selon la grande région, le secteur economique, le taux d'occupation et le sexe
+  it: Impieghi per grande regione, settore economico, tasso di occupazione e sesso
 
-# Data source name (required)
 source_name:
-  en: ""
-  # de: ""
+  en: FSO
+  de: BFS
+  fr: OFS
+  it: UST
 
-# URL to original data source (required)
-source_url: "https://"
+source_url: "https://www.fso.admin.ch"
 
-# Data frequency (required)
-# D = daily, W = weekly, M = monthly, Q = quarterly, Y = yearly, I = irregular
-dataset_frequency: "M"
+dataset_frequency: "Q"
 
-# Units of measurement
-# Use "all" if uniform across variables, or specify per variable key
 units:
   all:
-    en: ""
+    en: Jobs
+    de: Beschäftigte
+    fr: Emplois
+    it: Addetti
 
-# Aggregation method for temporal aggregation
-# Valid values: mean, sum, last, first
 aggregate:
-  all: "mean"
+  all: sum
 
-# Dimension order (left to right in the key, after country.provider.dataset)
-dim_order: []
+dim_order:
+  - geo
+  - sector
+  - employment.rate
+  - sex
 
-# Hierarchical structure of dimensions
-# Nest dimensions according to your key structure
-hierarchy: {}
+hierarchy:
+  geo:
+    '0':
+      '1': ~
+      '2': ~
+      '3': ~
+      '4': ~
+      '5': ~
+      '6': ~
+      '7': ~
+  sector:
+    tot:
+      '2': ~
+      '3': ~
+  employment.rate:
+    tot:
+      '1': ~
+      '2': ~
+    '3': ~
+    '4': ~
+    '41': ~
+  sex:
+    tot:
+      '1': ~
+      '2': ~
 
-# Human-readable labels for dimensions and their values
-# dimnames: labels for dimension names
-# <dimension_name>: labels for values within that dimension
 labels:
-  dimnames: {}
+  dimnames:
+    geo:
+      en: Major.region
+      de: Grossregion
+      fr: Grande.région
+      it: Grande.Regione
+    sector:
+      en: Economic.sector
+      de: Wirtschaftssektor
+      fr: Secteur.économique
+      it: Settore.economico
+    employment.rate:
+      en: Employment.rate
+      de: Beschäftigungsgrad
+      fr: Taux.d.occupation
+      it: Grado.di.occupazione
+    sex:
+      en: Gender
+      de: Geschlecht
+      fr: Sexe
+      it: Sesso
+  geo:
+    '0':
+      en: Switzerland
+      de: Schweiz
+      fr: Suisse
+      it: Svizzera
+    '1':
+      en: Lake Geneva region
+      de: Genferseeregion
+      fr: Région lémanique
+      it: Regione del Lemano
+    '2':
+      en: Espace Mittelland
+      de: Espace Mittelland
+      fr: Espace Mittelland
+      it: Espace Mittelland
+    '3':
+      en: North-Western Switzerland
+      de: Nordwestschweiz
+      fr: Suisse du Nord-Ouest
+      it: Svizzera nordoccidentale
+    '4':
+      en: Zurich Region
+      de: Zürich
+      fr: Zurich
+      it: Zurigo
+    '5':
+      en: Eastern Switzerland
+      de: Ostschweiz
+      fr: Suisse orientale
+      it: Svizzera orientale
+    '6':
+      en: Central Switzerland
+      de: Zentralschweiz
+      fr: Suisse centrale
+      it: Svizzera centrale
+    '7':
+      en: Ticino
+      de: Tessin
+      fr: Tessin
+      it: Ticino
+  sector:
+    '2':
+      en: Sector 2
+      de: Sektor 2
+      fr: Secteur 2
+      it: Settore 2
+    '3':
+      en: Sector 3
+      de: Sektor 3
+      fr: Secteur 3
+      it: Settore 3
+    tot:
+      en: Sectors 2-3
+      de: Sektoren 2-3
+      fr: Secteurs 2-3
+      it: Settori 2-3
+  employment.rate:
+    '1':
+      en: Full time
+      de: Vollzeit
+      fr: Plein temps
+      it: Tempo pieno
+    '2':
+      en: Part time
+      de: Teilzeit
+      fr: Temps partiel
+      it: Tempo parziale
+    '3':
+      en: Total, seasonally adjusted
+      de: Total, saisonbereinigt
+      fr: Total, désaisonnalisé
+      it: Totale, destagionalizzato
+    '4':
+      en: Full time equivalents
+      de: Vollzeitäquivalente
+      fr: Equivalents plein temps
+      it: Equivalenti a tempo pieno
+    '41':
+      en: Full time equivalents, seasonally adjusted
+      de: Vollzeitäquivalente, saisonbereinigt
+      fr: Equivalents plein temps, désaisonnalisés
+      it: Equivalenti a tempo pieno, destagionalizzati
+    tot:
+      en: Employment rate - total
+      de: Beschäftigungsgrad - Total
+      fr: Taux d'occupation - total
+      it: Grado di occupazione - totale
+  sex:
+    '1':
+      en: Man
+      de: Mann
+      fr: Homme
+      it: Uomo
+    '2':
+      en: Woman
+      de: Frau
+      fr: Femme
+      it: Donna
+    tot:
+      en: Gender - total
+      de: Geschlecht - Total
+      fr: Sexe - total
+      it: Sesso - totale
 
-
-# update checksum is empty in the beginning
+# update_checksum is managed programmatically by opentimeseries::update_checksum()
 update_checksum: ""

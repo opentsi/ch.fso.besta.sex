@@ -4,7 +4,7 @@ library(opentimeseries)
 ## Example Step 2, Generate History
 
 library(tsdbapi)
-keys <- read_dataset_keys("ch.fso.indpau")
+keys <- read_dataset_keys("ch.fso.besta.sex")
 length(keys)
 all_vintages <- read_ts_history(keys)
 
@@ -14,7 +14,7 @@ vintage_date_str <- sub(".+_([0-9]{8})$", "\\1", names(all_vintages))
 vintage_dates <- as.Date(vintage_date_str, format = "%Y%m%d")
 names(all_vintages) <- sub("_([0-9]{4})([0-9]{2})[0-9]{2}$", ".\\1-\\2", names(all_vintages))
 # remove the dataset prefix so keys match the relative key structure in the archive
-names(all_vintages) <- sub("^ch\\.fso\\.indpau\\.", "", names(all_vintages))
+names(all_vintages) <- sub("^ch\\.fso\\.besta\\.sex\\.", "", names(all_vintages))
 class(all_vintages) <- c(class(all_vintages), "tslist")
 
 
@@ -36,7 +36,6 @@ validate_metadata(meta) # TRUE
 
 
 ## Step 6: Seal Archive
-key <- "...."
 devtools::load_all()
 library(digest)
 checksum_input <- generate_checksum_input(key = key)
@@ -50,5 +49,3 @@ handle_update(key = key)
 library(devtools)
 check()
 install()
-
-
