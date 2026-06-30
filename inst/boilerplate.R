@@ -28,7 +28,7 @@ archive_import_history(vintages_dt, repository_path = ".")
 ## Step 5: Write & Validate Metadata
 
 # check if info is available via api
-indpau_meta <- read_dataset_ts_metadata("ch.fso.indpau") 
+indpau_meta <- read_dataset_ts_metadata("ch.fso.indpau")
 
 render_metadata()
 meta <- read_meta(".")
@@ -49,3 +49,7 @@ handle_update(key = key)
 library(devtools)
 check()
 install()
+
+
+# build readme
+build_readme()
